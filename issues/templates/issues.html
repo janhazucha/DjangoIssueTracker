@@ -1,7 +1,17 @@
-<html>
+{% block content %}
+    <h1>Issues</h1>
+    <ul>
+{% for issue in issues_list %}
+    <strong>{{ issue }}</strong>
+        <ul>
+            <li>Category: {{ issue.category }}</li>
+            <li>Status: {{ issue.status }}</li>
+            <li>Author: {{ issue.author }}</li>
+            <li>Assignee: {{ issue.assignee }}</li>
+            <li>Created: {{ issue.created_at }}</li>
+        </ul>
+        <br/>
 
-<body>
-    <p>Hello</p>
-</body>
-
-</html>
+{% endfor %}
+    </ul>
+{% endblock %}
