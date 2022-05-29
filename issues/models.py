@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .utils import ChoiceEnum
-
 
 class Issue(models.Model):
     CATEGORY_CHOICES = (
@@ -24,3 +22,6 @@ class Issue(models.Model):
     status = models.CharField(choices=STATUS_CHOICES, max_length=50, default='ToDo')
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

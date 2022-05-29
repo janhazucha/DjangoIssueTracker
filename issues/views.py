@@ -1,19 +1,18 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .models import Issue
 from .forms import IssueForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+import json
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from django.http import JsonResponse
+from .serializers import IssueSerializer
+
 
 def get_issues(request):
-    list_of_issues = Issue.objects.all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(list_of_issues, 20)
-    try:
-        issues = paginator.page(page)
-    except PageNotAnInteger:
-        issues = paginator.page(1)
-    except EmptyPage:
-        issues = paginator.page(paginator.num_pages)
-    return render(request, "issues.html", {'issues': issues})
+    issues_list = Issue.objects.all()
+    return render(request, "issues.html", {'issues_list': issues_list})
 
 
 def create_issue(request):
@@ -29,19 +28,15 @@ def create_issue(request):
     return render(request, "issueform.html", context)
 
 
+@api_view(['GET'])
+def rest_issues(request):
+    issues_set = Issue.objects.all()
+    serializer = IssueSerializer(issues_set, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# def create_issue(request):
-#     if request.method == "POST":
-#         form = IssueForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.instance.author = request.user
-#             if form.instance.issue_type == 'FEATURE':
-#                 form.instance.price = 100
-#             else:
-#                 form.instance.price = 0
-#             issue = form.save()
-#             return redirect(issue_detail, issue.pk)
-#     else:
-#         form = IssueForm()
-#     return render(request, 'issueform.html', {'form': form})
+@api_view(['GET'])
+def get_issue_by_id_rest(id):
+    issue = Issue.objects.get(id=id)
+    serializer = IssueSerializer(issue)
+    return JsonResponse(serializer.data, status=status.HTTP_200_OK)
