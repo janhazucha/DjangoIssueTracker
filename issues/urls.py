@@ -8,6 +8,6 @@ urlpatterns = [
 
     #REST API
     path('get_issues_rest', get_issues_rest, name='get_issues_rest'),
-    path('<int:id>', get_issue_by_id_rest, name='get_issue_by_id_rest'),
+    path('<int:id>/', get_issue_by_id_rest, name='get_issue_by_id_rest'),
 
 ]

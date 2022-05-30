@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse
 
 from .models import Issue
@@ -41,7 +41,7 @@ def edit_issue(request, issue_id):
     return render(request, 'issueform.html', context)
 
 
-
+#REST API Views
 
 @api_view(['GET'])
 def get_issues_rest(request):
@@ -51,7 +51,7 @@ def get_issues_rest(request):
 
 
 @api_view(['GET'])
-def get_issue_by_id_rest(id):
+def get_issue_by_id_rest(request, id):
     issue = Issue.objects.get(id=id)
     serializer = IssueSerializer(issue)
     return JsonResponse(serializer.data, status=status.HTTP_200_OK)
