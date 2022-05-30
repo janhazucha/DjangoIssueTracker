@@ -1,8 +1,15 @@
 {% block content %}
-    <h1>Issues</h1>
-    <ul>
+<h1>Django Issue Tracker Demo</h1>
+<p>This is a Django based app where you can create ticket for bug, documentation or improvement and watch
+    state of processing the ticket</p>
+
+<h2>Create ticket</h2>
+<p>You can create a ticket <a href="{% url 'create_issue' %}">here</a></p>
+
+<h2>List of issues</h2>
+<ul>
 {% for issue in issues_list %}
-    <strong>{{ issue }}</strong>
+    <h3><strong>{{ issue }}</strong></h3>
         <ul>
             <li>Category: {{ issue.category }}</li>
             <li>Status: {{ issue.status }}</li>
@@ -10,6 +17,9 @@
             <li>Assignee: {{ issue.assignee }}</li>
             <li>Created: {{ issue.created_at }}</li>
         </ul>
+        <p>
+          <a href="{% url 'edit_issue' issue.id %}">Edit issue</a>
+        </p>
         <br/>
 
 {% endfor %}
