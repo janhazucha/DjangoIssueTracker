@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Issue(models.Model):
     CATEGORY_CHOICES = (
         ('Bug', 'Bug'),
@@ -30,3 +31,4 @@ class Issue(models.Model):
     def get_spent_time(self):
         delta = (self.updated_at - self.created_at).total_seconds()//60
         return delta
+

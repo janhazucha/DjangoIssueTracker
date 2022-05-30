@@ -13,7 +13,14 @@ from .serializers import IssueSerializer
 
 def get_issues(request):
     issues_list = Issue.objects.all().order_by('-created_at')
-    return render(request, "issues.html", {'issues_list': issues_list})
+    deltas = []
+    for i in issues_list:
+        if i.status == 'Done':
+            deltas.append(i.updated_at - i.created_at)
+    max_spent_time = max(deltas)
+    min_spent_time = min(deltas)
+    return render(request, "issues.html", {'issues_list': issues_list, 'max_spent_time': max_spent_time,
+                                           'min_spent_time': min_spent_time})
 
 
 def create_issue(request):

@@ -6,6 +6,8 @@
 <h2>Create ticket</h2>
 <p>You can create a ticket <a href="{% url 'create_issue' %}">here</a></p>
 
+<p>Maximal resolving time: {{ max_spent_time }}</p>
+<p>Minimal resolving time: {{ min_spent_time }}</p>
 <h2>List of issues</h2>
 <ul>
 {% for issue in issues_list %}
@@ -16,6 +18,7 @@
             <li>Author: {{ issue.author }}</li>
             <li>Assignee: {{ issue.assignee }}</li>
             <li>Created: {{ issue.created_at }}</li>
+            <li>Duration: {{ issue.duration }}</li>
         </ul>
         <p>
           <a href="{% url 'edit_issue' issue.id %}">Edit issue</a>

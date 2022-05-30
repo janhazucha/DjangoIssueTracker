@@ -4,4 +4,4 @@ from .models import Issue
 class IssueForm(ModelForm):
     class Meta:
         model = Issue
-        fields = ('title', 'description', 'author', 'assignee', 'category')
+        fields = ('title', 'description', 'author', 'assignee', 'category', 'status')
