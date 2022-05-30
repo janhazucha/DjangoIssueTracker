@@ -1,22 +1,20 @@
 # DjangoIssueTracker
-Navrhnout a implementovat v Djangu jednoduchý issue tracker:‎
 
-- issue má zadavatele, řešitele, textový popis, stav, kategorii (např. bug, vylepšení, dokumentace)
+###App description
+This is Django based application for tracking issue resolving process.
 
-- issues lze ve webovém rozhraní přidávat, editovat a budou mít stránku se seznamem (lze použít Django Admin nebo jakoukoliv jinou knihovnu)
+###App main features
+- Create, edit or list all issues in web app
 
-- seznam issues zobrazuje v hlavičce jednoduché statistiky (průměrný, nejdelší a nejkratší čas řešení issue)
+- Issue Object contains information title, description, status, category, author and assignee
 
-- kategorie stačí mít pouze v DB, bez administrace, ale v budoucnu by její přidání mělo být co nejjednodušší
+- Maximal and minimal issue resolving time statstics
 
-- 2 uživatelské role: superuser a staff, staff nesmí nic měnit ani přidávat, superuser může vše
+- Two user roles: superuser and stff
 
-- REST/JSON API pro seznam a detail issues (lze použít knihovnu nebo čisté Django)
+- REST/JSON API end-points for listing all issues or get a detail of specific issue
 
-- testy podle uvážení
-
-- smysluplné verzování Gitem
-
-- jako DB stačí sqlite‎
-
-- musí být jasné, jak projekt nainstalovat a spustit
+###How to install app
+- Clone the repo and cd into the project directory
+- Ensure you have Python 3 and create a virtual environment and activate it
+- Install dependencies: ``` pip3 install -r requirements.txt```
